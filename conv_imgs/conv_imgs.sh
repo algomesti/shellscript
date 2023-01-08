@@ -9,13 +9,13 @@ convert_images() {
     for image in *.jpg 
     do
         local image_without_ext=$(ls $image | awk -F. '{ print $1 }')
-        convert $image_without_ext.jpg in png/$image_without_ext.png
+        convert $image_without_ext.jpg png/$image_without_ext.png
     done
 }
 
 convert_images 2>error.log;
 
-[ $? -eq 0 ] && {
-    echo "\n ERROR: - Fail Executing Script"
+[ $? -ne 0 ] && {
+    echo -e "\n ERROR: - Fail Executing Script \n"
     exit 1;
 }
