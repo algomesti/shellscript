@@ -20,7 +20,6 @@ clone_repos() {
         git clone $repository $target/$project;
         echo -e "\tRepository '$repository' cloned in folder: '$target'/$project \n";
         let total++;
-        exit 1
     done
     echo -e "========================================";
     echo -e "Total of repositories cloned: $total";
@@ -34,7 +33,7 @@ clone_repos() {
 
 clone_repos $1 $2 2>error.log;
 
-[ $? -eq 0 ] && {
-    echo "\n ERROR: - Fail Executing Script"
+[ $? -ne 0 ] && {
+    echo -e "\n ERROR: - Fail Executing Script"
     exit 1;
 }
